@@ -1,0 +1,42 @@
+<h1>Login</h1>
+
+<div *ngIf="message">
+  {{ message }}
+</div>
+
+<a routerLink="/">sign in</a>
+
+<form [formGroup]='registrationForm' novalidate>
+  <div>
+    <label for="username">User: </label>
+    <input formControlName='username'>
+  </div>
+
+  <div *ngIf="username.invalid">
+    <p *ngIf="(username.dirty || username.touched) && username.errors.required">required</p>
+    <p *ngIf="(username.dirty || username.touched) && username.errors.minlength">at least 8 characters long</p>
+  </div>
+
+  <div>
+    <label for="password">Password: </label>
+    <input type="password" formControlName='password'>
+  </div>
+
+  <div *ngIf="password.invalid">
+    <p *ngIf="(password.dirty || password.touched) && password.errors.required">required</p>
+    <p *ngIf="(password.dirty || password.touched) && password.errors.minlength">at least 8 characters long</p>
+  </div>
+
+  <div>
+    <label for="email">Email: </label>
+    <input type="text" formControlName='email'>
+  </div>
+
+  <div *ngIf="email.invalid">
+    <p *ngIf="(email.dirty || email.touched) && email.errors.required">required</p>
+  </div>
+
+  <a *ngIf="registrationForm.valid" (click)="login()">
+    Submit
+  </a>
+</form>
