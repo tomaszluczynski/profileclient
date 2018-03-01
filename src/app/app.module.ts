@@ -8,13 +8,15 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
 import { ProfileService } from "./profile.service";
 import { RegistrationFormComponent } from './registration-form/registration-form.component'
 import { ReactiveFormsModule } from '@angular/forms';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginFormComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    ForgotPasswordComponent
     
   ],
   imports: [
