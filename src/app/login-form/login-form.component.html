@@ -1,35 +1,51 @@
 <h1>Login</h1>
 
+
+
+<div layout-fill layout="column" layout-align="center center">
+  <div layout="row" layout-align="center center">
+
+
 <div *ngIf="message">
   {{ message }}
 </div>
 
-<a routerLink="/register">register</a>
-<a routerLink="/forgotpassword">forgot password</a>
+<mat-card>
 
+  <mat-card-content>
 
-<form [formGroup]='loginForm' novalidate>
-  <div>
-    <label for="username">User: </label>
-    <input formControlName='username'>
-  </div>
+  <a routerLink="/register">register</a>
+  <a routerLink="/forgotpassword">forgot password</a>
 
-  <div *ngIf="username.invalid">
-    <p *ngIf="(username.dirty || username.touched) && username.errors.required">required</p>
-    <p *ngIf="(username.dirty || username.touched) && username.errors.minlength">at least 8 characters long</p>
-  </div>
+  <form [formGroup]='loginForm' novalidate>
+   
+    <div>
+      <label for="username">User: </label>
+      <input mdInput formControlName='username'>
+    </div>
+   
+    <div *ngIf="username.invalid">
+      <p *ngIf="(username.dirty || username.touched) && username.errors.required">required</p>
+      <p *ngIf="(username.dirty || username.touched) && username.errors.minlength">at least 8 characters long</p>
+    </div>
 
-  <div>
-    <label for="password">Password: </label>
-    <input type="password" formControlName='password'>
-  </div>
+    <div>
+      <label for="password">Password: </label>
+      <input mdInput type="password" formControlName='password'>
+    </div>
 
-  <div *ngIf="password.invalid">
-    <p *ngIf="(password.dirty || password.touched) && password.errors.required">required</p>
-    <p *ngIf="(password.dirty || password.touched) && password.errors.minlength">at least 8 characters long</p>
-  </div>
+    <div *ngIf="password.invalid">
+      <p *ngIf="(password.dirty || password.touched) && password.errors.required">required</p>
+      <p *ngIf="(password.dirty || password.touched) && password.errors.minlength">at least 8 characters long</p>
+    </div>
 
-  <a *ngIf="loginForm.valid" (click)="login()">
-    Submit
-  </a>
-</form>
+    <button mat-button *ngIf="loginForm.valid" (click)="login()" color="primary">
+      Submit
+    </button>
+  </form>
+
+</mat-card-content>
+</mat-card>
+
+</div>
+</div>
