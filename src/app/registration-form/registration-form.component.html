@@ -1,42 +1,56 @@
-<h1>Login</h1>
+<div class="module form-module">
+  <div class="form">
+    <h2>Create an account</h2>
 
-<div *ngIf="message">
-  {{ message }}
+    <form [hidden]="submitted" (ngSubmit)="submit(registrationForm.value)" [formGroup]="registrationForm">
+
+      <p class="validation">{{responseMessage}}</p>
+
+      <input type="text" placeholder="Username" #username
+             [formControl]="registrationForm.controls['username']"
+             [class.invalid]="fh.isInvalid(registrationForm, 'username')"/>
+
+    <!--  <p *ngIf="fh.hasError(registrationForm, 'required', 'username')" class="validation">username is required</p>
+      <p *ngIf="fh.hasError(registrationForm, 'minlength', 'username')" class="validation">minimum 4 characters</p>-->
+
+      <div *ngIf="username.value">
+        <p class="urlinfo">your portfolio address will be</p>
+        <p class="url">{{username.value}}.photeria.net</p>
+      </div>
+
+      <input type="password" placeholder="Password"
+             [formControl]="registrationForm.controls['password']"
+             [class.invalid]="fh.isInvalid(registrationForm, 'password')"/>
+
+     <!-- <p *ngIf="fh.hasError(registrationForm, 'required', 'password')" class="validation">password is required</p>
+      <p *ngIf="fh.hasError(registrationForm, 'minlength', 'password')" class="validation">password is too short</p>-->
+
+      <input type="password" placeholder="Re-enter Password"
+             [formControl]="registrationForm.controls['password2']"
+             [class.invalid]="fh.isInvalid(registrationForm, 'password2')"/>
+
+    <!--  <p *ngIf="fh.hasError(registrationForm, 'required', 'password2')" class="validation">password confirmation is
+        required</p>
+      <p *ngIf="registrationForm.hasError('passwordMismatch')" class="validation">passwords do not match</p>-->
+
+      <input type="email" placeholder="Email Address"
+             [formControl]="registrationForm.controls['email']"
+             [class.invalid]="fh.isInvalid(registrationForm, 'email')">
+
+     <!-- <p *ngIf="fh.hasError(registrationForm, 'incorrectMailFormat', 'email')" class="validation">email is not
+        correct</p>
+      <p *ngIf="fh.hasError(registrationForm, 'required', 'email')" class="validation">email is required</p>-->
+
+      <button type="submit" [disabled]="!registrationForm.valid">Register</button>
+      <button class="social fb">Sign up with Facebook</button>
+      <button class="social twt">Sign up with Twitter</button>
+    </form>
+
+    <div [hidden]="!submitted">
+
+      {{ diagnostic }}
+    </div>
+  </div>
+
+  <div class="cta"><a class="toggle" [routerLink]="['/']">LOGIN HERE!</a></div>
 </div>
-
-<a routerLink="/">sign in</a>
-
-<form [formGroup]='registrationForm' novalidate>
-  <div>
-    <label for="username">User: </label>
-    <input formControlName='username'>
-  </div>
-
-  <div *ngIf="username.invalid">
-    <p *ngIf="(username.dirty || username.touched) && username.errors.required">required</p>
-    <p *ngIf="(username.dirty || username.touched) && username.errors.minlength">at least 8 characters long</p>
-  </div>
-
-  <div>
-    <label for="password">Password: </label>
-    <input type="password" formControlName='password'>
-  </div>
-
-  <div *ngIf="password.invalid">
-    <p *ngIf="(password.dirty || password.touched) && password.errors.required">required</p>
-    <p *ngIf="(password.dirty || password.touched) && password.errors.minlength">at least 8 characters long</p>
-  </div>
-
-  <div>
-    <label for="email">Email: </label>
-    <input type="text" formControlName='email'>
-  </div>
-
-  <div *ngIf="email.invalid">
-    <p *ngIf="(email.dirty || email.touched) && email.errors.required">required</p>
-  </div>
-
-  <a *ngIf="registrationForm.valid" (click)="login()">
-    Submit
-  </a>
-</form>

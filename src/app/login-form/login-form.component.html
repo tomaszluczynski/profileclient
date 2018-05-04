@@ -1,56 +1,39 @@
-
-<div class="flexbox-parent"  >
-
-<div fxLayout="row" layout-align="center center" fxLayout.xs="column">
-  
-  <div fxFlex="35%;" fxFlex.xs="80%">
-   
-  </div>
-
-  <mat-card fxFlex="50%;" fxFlex.xs="80%">
-
-    <mat-card-content>
-  
-    <a routerLink="/register">register</a>
-    <a routerLink="/forgotpassword">forgot password</a>
-  
+<div class="module form-module">
+  <div class="form">
+    <h2>Login to your account</h2>
     <form [formGroup]='loginForm' novalidate>
-     
-      <div>
-        <label for="username">User: </label>
-        <input mdInput formControlName='username'>
+
+      <p *ngIf="message" class="validation">{{ message }}</p>
+
+      <input formControlName='username'
+             placeholder="Username"
+             [class.invalid]="username.invalid && username.touched && submitted">
+
+      <div *ngIf="username.invalid && submitted">
+        <p *ngIf="(username.dirty || username.touched) && username.errors.required" class="validation">required</p>
+        <p *ngIf="(username.dirty || username.touched) && username.errors.minlength" class="validation">at least 8
+          characters long</p>
       </div>
-     
-      <div *ngIf="username.invalid">
-        <p *ngIf="(username.dirty || username.touched) && username.errors.required">required</p>
-        <p *ngIf="(username.dirty || username.touched) && username.errors.minlength">at least 8 characters long</p>
+
+      <input type="password" placeholder="Password" name="password"
+             [formControl]="loginForm.controls['password']"
+             [class.invalid]="password.invalid && password.touched && submitted"/>
+
+      <div *ngIf="password.invalid && submitted">
+        <p *ngIf="(password.dirty || password.touched) && password.errors.required" class="validation">required</p>
+        <p *ngIf="(password.dirty || password.touched) && password.errors.minlength" class="validation">at least 8
+          characters long</p>
       </div>
-  
-      <div>
-        <label for="password">Password: </label>
-        <input mdInput type="password" formControlName='password'>
-      </div>
-  
-      <div *ngIf="password.invalid">
-        <p *ngIf="(password.dirty || password.touched) && password.errors.required">required</p>
-        <p *ngIf="(password.dirty || password.touched) && password.errors.minlength">at least 8 characters long</p>
-      </div>
-  
-      <button mat-button *ngIf="loginForm.valid" (click)="login()" color="primary">
-        Submit
+
+      <button (click)="login()" [class.disabled]="sent" [disabled]="sent">
+        Login
       </button>
+
+      <p><a [routerLink]="['/forgotpassword']">Forgot your password?</a></p>
+      <button class="social fb">Login with Facebook</button>
+      <button class="social twt">Login with Twitter</button>
     </form>
-  
-  </mat-card-content>
-  </mat-card>
-  
-
-
-  <div fxFlex="35%;" fxFlex.xs="80%">
-   
   </div>
-</div>
 
-
-
+  <div class="cta"><a class="toggle" [routerLink]="['/register']">NO ACCOUNT YET? SIGN-UP!</a></div>
 </div>

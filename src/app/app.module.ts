@@ -8,11 +8,9 @@ import { ProfileService } from "./profile.service";
 import { RegistrationFormComponent } from './registration-form/registration-form.component'
 import { ReactiveFormsModule } from '@angular/forms';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { AppMaterialModules } from './material/material.module';
-import { FlexLayoutModule } from "@angular/flex-layout";
-
 
 @NgModule({
   declarations: [
@@ -20,14 +18,13 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     LoginFormComponent,
     RegistrationFormComponent,
     ForgotPasswordComponent
-    
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    AppMaterialModules,
-    FlexLayoutModule
+    HttpClientModule
   ],
   providers: [{
     provide: ProfileService, useClass: ProfileService
