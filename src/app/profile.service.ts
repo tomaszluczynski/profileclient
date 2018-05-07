@@ -2,8 +2,7 @@ import {Injectable} from '@angular/core';
 import {Login} from './model/Login';
 import {LoginResult} from "./model/LoginResult";
 import {HttpClient} from "@angular/common/http";
-import {Observable, Subscribable} from "rxjs/Observable";
-import {Subscription} from "rxjs/Subscription";
+import {Observable, Subscribable, Subscription} from "rxjs";
 
 @Injectable()
 export class ProfileService {
